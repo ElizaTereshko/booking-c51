@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Place</title>
+</head>
+<body>
+<html th:include="_header"/>
+<div th:if="${incorrectId == null}">
+    <div class="uk-child-width-expand@s uk-margin-left uk-margin-top uk-margin-right" uk-grid>
+        <div class="uk-grid-item-match">
+            <div class="uk-card uk-card-default uk-card-body">
+                <div class="uk-inline">
+                    <h1 class="uk-heading-bullet uk-margin-top uk-margin-left" style="color: lightblue" th:text="${place.name}"></h1>
+                    <form sec:authorize="hasAnyAuthority('ADMIN')" th:action="@{edit}" method="get">
+                        <input type="hidden" name="id" th:value="${place.id}">
+                        <input type="hidden" name="nameOfEditableField" th:value="'name'">
+                        <button class="uk-button uk-button-text">
+                            <span uk-icon="icon: pencil"></span>
+                        </button>
+                    </form>
+                </div>
+                <div class="uk-margin-left uk-margin-top uk-margin-bottom uk-margin-right">
+                    <form sec:authorize="hasAnyAuthority('ADMIN')" th:action="@{edit}" method="get">
+                        <input type="hidden" name="id" th:value="${place.id}">
+                        <button class="uk-button uk-button-text">
+                            <span uk-icon="icon: pencil"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="uk-position-relative-center">
+
+            <div class="uk-inline">
+                <label for="address" class="uk-text-italic uk-text-large" style="color: teal">
+                    Address: </label>
+                <form sec:authorize="hasAnyAuthority('ADMIN')" th:action="@{edit}" method="get">
+                    <input type="hidden" name="id" th:value="${place.id}">
+                    <input type="hidden" name="nameOfEditableField" th:value="'address'">
+                    <button class="uk-button uk-button-text">
+                        <span uk-icon="icon: pencil"></span>
+                    </button>
+                </form>
+            </div>
+            <br>
+            <span id="address" th:text="${place.address}"></span>
+            <hr>
+            <div class="uk-inline">
+                <label for="workTime" class="uk-text-italic uk-text-large" style="color: teal">
+                    Work time: </label>
+                <form sec:authorize="hasAnyAuthority('ADMIN')"  th:action="@{edit}" method="get">
+                    <input type="hidden" name="id" th:value="${place.id}">
+                    <input type="hidden" name="nameOfEditableField" th:value="workTime">
+                    <button class="uk-button uk-button-text">
+                        <span uk-icon="icon: pencil"></span>
+                    </button>
+                </form>
+            </div>
+            <br>
+            <span id="workTime" th:text="${place.workTime}"></span>
+            <hr>
+            <div class="uk-inline">
+                <label for="tableCount" class="uk-text-italic uk-text-large" style="color: teal">
+                    Count of tables: </label>
+                <form sec:authorize="hasAnyAuthority('ADMIN')"  th:action="@{edit}" method="get">
+                    <input type="hidden" name="id" th:value="${place.id}">
+                    <input type="hidden" name="nameOfEditableField" th:value="tableCount">
+                    <button class="uk-button uk-button-text">
+                        <span uk-icon="icon: pencil"></span>
+                    </button>
+                </form>
+            </div>
+            <br>
+            <span id="tableCount" th:text="${place.tableCount}"></span>
+            <hr>
+            <form sec:authorize="hasAnyAuthority('ADMIN', 'MODERATOR')" th:action="@{edit}" method="get">
+                <input type="hidden" name="id" th:value="${place.id}">
+                <button class="uk-button uk-button-default">Edit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div  th:if="${incorrectId==null}" style="margin-left: 5%; margin-right: 5%; margin-top: 2%; margin-bottom: 5%">
+    <form sec:authorize="hasAnyAuthority('ADMIN')"  th:action="@{edit}" method="get">
+        <input type="hidden" name="id" th:value="${place.id}">
+        <input type="hidden" name="nameOfEditableField" th:value="'description'">
+        <button class="uk-button uk-button-text">
+            <span uk-icon="icon: pencil"></span>
+        </button>
+    </form>
+    <uk uk-accordion>
+        <li>
+            <a class="uk-accordion-title uk-text-large uk-text-italic uk-text-uppercase"
+               style="color: coral" href="#">Description</a>
+            <div class="uk-accordion-content">
+                <p class="uk-text-left">
+                    <span th:text="${place.description}"></span>
+                </p>
+            </div>
+        </li>
+    </uk>
+    <li>
+        <a href="/reservation">Reserve!</a>
+    </li>
+</div>
+<div th:if="${incorrectId!=null}" class="uk-alert-danger uk-container-xsmall uk-position-large uk-position-bottom-center"
+     uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+    <span th:text="${incorrectId}"></span>
+</div>
+</body>
+</html>

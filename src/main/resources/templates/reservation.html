@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation</title>
+</head>
+<body>
+<html th:include="_header"/>
+<div class="uk-child-width-expand@s" uk-grid>
+    <div class="uk-position-center-left uk-margin-left">
+        <h1 class="uk-text-uppercase uk-text-light" style="color: cadetblue">Reservation</h1>
+    </div>
+    <div class="uk-grid-item-match uk-width-1-3 uk-position-center uk-margin-right">
+        <div class="uk-card uk-card-default uk-card-body">
+            <form th:action="@{reservation}" th:object="${reservation}" method="post">
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                        <input class="uk-input" type="datetime-local" th:field="*{startReservation}" placeholder="Start reservation">
+                    </div>
+                    <p th:if="${#fields.hasErrors('startReservation')}" th:errors="*{startReservation}" style="color: coral"></p>
+                </div>
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                        <input class="uk-input" type="datetime-local" th:field="*{endReservation}" placeholder="Start reservation">
+                    </div>
+                    <p th:if="${#fields.hasErrors('endReservation')}" th:errors="*{endReservation}" style="color: coral"></p>
+                </div>
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: phone"></span>
+                        <input class="uk-input" type="text" th:field="*{comment}" placeholder="Your phone">
+                    </div>
+                    <p th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}" style="color: coral"></p>
+                </div>
+                <button class="uk-button uk-button-default">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

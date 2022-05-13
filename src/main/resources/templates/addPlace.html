@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add place page</title>
+</head>
+<body>
+<html th:include="_header"/>
+<h1 class="uk-text-uppercase uk-text-light uk-margin-left uk-position-center-left" style="color: cadetblue">Add place</h1>
+<div style="margin-left: 50%; margin-top: 3%; margin-right: 3%; margin-bottom: 3%">
+    <form th:action="@{add}" th:object="${placeAddForm}" method="post">
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <label> Name : <input class="uk-input" type="text" th:field="*{name}"/></label>
+            </div>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: coral">
+        </div>
+
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <label> Address : <input class="uk-input" type="text" th:field="*{address}"/></label>
+            </div>
+            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color: coral">
+        </div>
+
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <label> WorkTime: <input class="uk-input" type="text" th:field="*{workTime}"/></label>
+            </div>
+            <p th:if="${#fields.hasErrors('workTime')}" th:errors="*{workTime}" style="color: coral">
+        </div>
+
+        <div class="uk-margin">
+            <div class="uk-inline">
+                <label> TableCount <input class="uk-input" type="text" th:field="*{tableCount}"/></label>
+            </div>
+            <p th:if="${#fields.hasErrors('tableCount')}" th:errors="*{tableCount}" style="color: coral">
+        </div>
+
+        <div class="uk-margin">
+            <p>Description: </p>
+            <textarea class="uk-textarea" rows="5" th:field="*{description}"></textarea>
+        </div >
+        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color: coral"></p>
+        <button class="uk-button uk-button-default">Add place</button>
+    </form>
+</div>
+
+<div th:if="${createdPlace!=null}" style= "margin-top: 5%" class="uk-alert-primary uk-position-top uk-text-center" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+    <span th:text="${createdPlace}"></span>
+    <span>Click <a th:href="@{/place/add}">here</a> to add place</span>
+</div>
+<div th:if="${doesPlaceExist}" style= "margin-top: 5%" class="uk-alert-danger uk-position-top uk-text-center" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+    <span>This place already exists</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+</head>
+<body>
+<html th:include="_header"/>
+<h1 class="uk-heading-bullet uk-margin-top uk-margin-left" style="color: lightblue">Reservations:</h1>
+<div class="uk-grid uk-margin-top uk-margin-right uk-margin-left">
+    <table class="uk-table uk-table-middle uk-table-divider" th:if="${session.reservation != null}">
+        <thead>
+        <tr>
+            <th>Place</th>
+            <th>Start of reservation</th>
+            <th>End of reservation</th>
+            <th>REMOVE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reservation : ${session.reservation}">
+            <td th:text="${place.name}"></td>
+            <td th:text="${startReservation}"></td>
+            <td th:text="${endReservation}"></td>
+            <td th:text="${comment}"></td>
+            <td>
+                <form th:action="@{'/remove/reservation/'+${reservation.id}}" method="post">
+                    <button class="uk-button uk-button-text">
+                        <span uk-icon="icon: minus-circle"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:if="${remove != null}" class="uk-alert-success uk-container-xsmall uk-position-bottom-right" uk-alert>
+    <a class="uk-alert-close" uk-close></a>
+    <p th:text="${remove}"></p>
+</div>
+</body>
+</html>
